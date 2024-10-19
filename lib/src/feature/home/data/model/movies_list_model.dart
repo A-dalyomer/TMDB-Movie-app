@@ -9,7 +9,7 @@ class MoviesListModel {
   late final List<MovieSummaryModel> results;
 
   MoviesListModel.fromJson(Map<String, dynamic> json) {
-    page = json['page'];
+    page = json['page'] ?? 1;
     results = List.from(json['results'])
         .map((e) => MovieSummaryModel.fromJson(e))
         .toList();
