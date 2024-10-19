@@ -13,6 +13,15 @@ class MovieSummaryModel extends MovieSummary {
       rating: json['vote_average'] ?? 0,
     );
   }
+
+  factory MovieSummaryModel.fromEntity(MovieSummary movie) {
+    return MovieSummaryModel(
+      posterImage: movie.posterImage,
+      title: movie.title,
+      rating: movie.rating,
+    );
+  }
+
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
     data['poster_path'] = posterImage;
