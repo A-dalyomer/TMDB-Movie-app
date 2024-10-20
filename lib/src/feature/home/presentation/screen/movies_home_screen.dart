@@ -37,7 +37,7 @@ class MoviesHomeScreen extends StatelessWidget {
                   case MoviesHomeInitial _:
                     return const LoadingWidget();
                   case MoviesHomeError _:
-                    return const LoadingErrorWidget();
+                    return LoadingErrorWidget(refresh: refreshMovies);
                   case MoviesHomeDone():
                     return SingleChildScrollView(
                       child: Column(
