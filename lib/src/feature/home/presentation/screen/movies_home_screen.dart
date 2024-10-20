@@ -20,7 +20,8 @@ class MoviesHomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text(ConstConfig.appName)),
       body: BlocProvider(
-        create: (context) => MoviesHomeBloc(moviesRepository),
+        create: (context) =>
+            MoviesHomeBloc(moviesRepository)..add(RefreshMoviesEvent()),
         child: Builder(builder: (context) {
           refreshMovies() async =>
               context.read<MoviesHomeBloc>().add(RefreshMoviesEvent());
