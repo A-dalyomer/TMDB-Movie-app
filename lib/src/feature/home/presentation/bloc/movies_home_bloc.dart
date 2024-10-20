@@ -61,13 +61,13 @@ class MoviesHomeBloc extends HydratedBloc<MoviesHomeEvent, MoviesHomeState> {
   }
 
   void openMoviesList(OpenMoviesListEvent event) {
-    print("lfsngslnfas");
     Navigator.push(
       event.context,
       MaterialPageRoute(
         builder: (context) => MoviesListScreen(
           movies: event.movies,
           movieType: event.movieType,
+          moviesHomeBloc: this,
         ),
       ),
     );

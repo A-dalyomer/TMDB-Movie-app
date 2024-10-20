@@ -11,34 +11,39 @@ class MoviesListScreen extends StatelessWidget {
     super.key,
     required this.movies,
     required this.movieType,
+    required this.moviesHomeBloc,
   });
   final List<MovieSummary> movies;
   final MovieType movieType;
+  final MoviesHomeBloc moviesHomeBloc;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(LocaleManager.tr(movieType.name)),
-      ),
-      body: GridView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          mainAxisExtent: MediaQuery.sizeOf(context).height * 0.25,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 6,
+    return BlocProvider<MoviesHomeBloc>.value(
+      value: moviesHomeBloc,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(LocaleManager.tr(movieType.name)),
         ),
-        itemCount: movies.length,
-        itemBuilder: (context, index) {
-          final movie = movies[index];
-          return MovieItem(
-            movie: movie,
-            onTap: () => context
-                .read<MoviesHomeBloc>()
-                .openMovieDetails(OpenMovieDetailsEvent(context, movie)),
-          );
-        },
+        body: GridView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisExtent: MediaQuery.sizeOf(context).height * 0.25,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 6,
+          ),
+          itemCount: movies.length,
+          itemBuilder: (context, index) {
+            final movie = movies[index];
+            return MovieItem(
+              movie: movie,
+              onTap: () => context
+                  .read<MoviesHomeBloc>()
+                  .openMovieDetails(OpenMovieDetailsEvent(context, movie)),
+            );
+          },
+        ),
       ),
     );
   }
