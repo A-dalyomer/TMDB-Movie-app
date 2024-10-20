@@ -39,7 +39,7 @@ class MoviesRepositoryImpl implements MoviesRepository {
   }) async {
     final Map<String, dynamic>? response =
         await apiRequestRepository.getRequest(
-      "${ConstApiPaths.domainLink}$moviesListApiPath?page=$page",
+      "$moviesListApiPath?page=$page",
     );
     if (response == null) return null;
     try {
