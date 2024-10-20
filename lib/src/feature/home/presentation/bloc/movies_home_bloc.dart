@@ -5,6 +5,7 @@ import 'package:tmdp_movie_app/src/feature/home/data/model/movie_summary_model.d
 import 'package:tmdp_movie_app/src/feature/home/domain/repository/movies_repository.dart';
 import 'package:tmdp_movie_app/src/feature/home/domain/util/enum.dart';
 import 'package:tmdp_movie_app/src/feature/home/presentation/screen/movie_details_screen.dart';
+import 'package:tmdp_movie_app/src/feature/home/presentation/screen/movies_list_screen.dart';
 
 import '../../domain/entity/movie_summary.dart';
 
@@ -15,7 +16,7 @@ class MoviesHomeBloc extends HydratedBloc<MoviesHomeEvent, MoviesHomeState> {
   MoviesHomeBloc(this.moviesRepository) : super(MoviesHomeInitial()) {
     on<RefreshMoviesEvent>((event, emit) async => await getMovies(emit));
     on<OpenMovieDetailsEvent>((event, emit) => openMovieDetails(event));
-    on<OpenMoviesListEvent>((even, emit) {});
+    on<OpenMoviesListEvent>((event, emit) => openMoviesList(event));
   }
   final MoviesRepository moviesRepository;
 
@@ -55,6 +56,19 @@ class MoviesHomeBloc extends HydratedBloc<MoviesHomeEvent, MoviesHomeState> {
       event.context,
       MaterialPageRoute(
         builder: (context) => MovieDetailsScreen(movieSummary: event.movie),
+      ),
+    );
+  }
+
+  void openMoviesList(OpenMoviesListEvent event) {
+    print("lfsngslnfas");
+    Navigator.push(
+      event.context,
+      MaterialPageRoute(
+        builder: (context) => MoviesListScreen(
+          movies: event.movies,
+          movieType: event.movieType,
+        ),
       ),
     );
   }

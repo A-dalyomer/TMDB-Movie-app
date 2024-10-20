@@ -25,10 +25,9 @@ class MoviesHomeScreen extends StatelessWidget {
         child: Builder(builder: (context) {
           refreshMovies() async =>
               context.read<MoviesHomeBloc>().add(RefreshMoviesEvent());
-          openMoviesList(MovieType type, List<MovieSummary>? movies) async =>
-              context
-                  .read<MoviesHomeBloc>()
-                  .add(OpenMoviesListEvent(type, movies));
+          openMoviesList(MovieType type, List<MovieSummary>? movies) => context
+              .read<MoviesHomeBloc>()
+              .add(OpenMoviesListEvent(context, type, movies!));
           return RefreshIndicator(
             onRefresh: () async => await refreshMovies(),
             child: BlocBuilder<MoviesHomeBloc, MoviesHomeState>(
@@ -45,7 +44,8 @@ class MoviesHomeScreen extends StatelessWidget {
                           MovieSection(
                             title:
                                 LocaleManager.tr(AppLocalizations.nowPlaying),
-                            refresh: () => openMoviesList(
+                            refresh: refreshMovies,
+                            onShowMore: () => openMoviesList(
                               MovieType.nowPlaying,
                               state.nowPlayingMovies,
                             ),
@@ -53,7 +53,8 @@ class MoviesHomeScreen extends StatelessWidget {
                           ),
                           MovieSection(
                             title: LocaleManager.tr(AppLocalizations.popular),
-                            refresh: () => openMoviesList(
+                            refresh: refreshMovies,
+                            onShowMore: () => openMoviesList(
                               MovieType.popular,
                               state.popularMovies,
                             ),
@@ -61,7 +62,8 @@ class MoviesHomeScreen extends StatelessWidget {
                           ),
                           MovieSection(
                             title: LocaleManager.tr(AppLocalizations.topRated),
-                            refresh: () => openMoviesList(
+                            refresh: refreshMovies,
+                            onShowMore: () => openMoviesList(
                               MovieType.topRated,
                               state.topRatedMovies,
                             ),

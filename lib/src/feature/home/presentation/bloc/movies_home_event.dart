@@ -12,7 +12,8 @@ final class OpenMovieDetailsEvent extends MoviesHomeEvent {
 }
 
 final class OpenMoviesListEvent extends MoviesHomeEvent {
-  OpenMoviesListEvent(this.movieType, this.movies);
+  OpenMoviesListEvent(this.context, this.movieType, this.movies);
+  final BuildContext context;
   final MovieType movieType;
-  final List<MovieSummary>? movies;
+  final List<MovieSummary> movies;
 }
