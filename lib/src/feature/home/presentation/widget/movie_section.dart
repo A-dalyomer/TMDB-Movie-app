@@ -48,7 +48,7 @@ class MovieSection extends StatelessWidget {
           SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.28,
             child: ListView.builder(
-              itemCount: movies!.length,
+              itemCount: movies!.length.clamp(0, 9),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 final movie = movies![index];
