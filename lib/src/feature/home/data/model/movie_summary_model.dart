@@ -27,6 +27,7 @@ class MovieSummaryModel extends MovieSummary {
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
+    data['id'] = id;
     data['poster_path'] = posterImage;
     data['original_title'] = title;
     data['vote_average'] = rating;
