@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:tmdp_movie_app/src/core/constants/const_config.dart';
 import 'package:tmdp_movie_app/src/feature/home/data/model/movie_summary_model.dart';
-import 'package:tmdp_movie_app/src/feature/home/data/model/movies_list_model.dart';
 import 'package:tmdp_movie_app/src/feature/home/domain/repository/movies_repository.dart';
 import 'package:tmdp_movie_app/src/feature/home/domain/util/enum.dart';
 import 'package:tmdp_movie_app/src/feature/home/presentation/screen/movie_details_screen.dart';
@@ -64,9 +63,15 @@ class MoviesHomeBloc extends HydratedBloc<MoviesHomeEvent, MoviesHomeState> {
   MoviesHomeState? fromJson(Map<String, dynamic> json) {
     if (json.isEmpty) return null;
     return MoviesHomeDone(
-      nowPlayingMovies: MoviesListModel.fromJson(json['top_rated']).results,
-      popularMovies: MoviesListModel.fromJson(json['popular']).results,
-      topRatedMovies: MoviesListModel.fromJson(json['now_playing']).results,
+      nowPlayingMovies: List.from(json['top_rated'])
+          .map((e) => MovieSummaryModel.fromJson(e))
+          .toList(),
+      popularMovies: List.from(json['popular'])
+          .map((e) => MovieSummaryModel.fromJson(e))
+          .toList(),
+      topRatedMovies: List.from(json['now_playing'])
+          .map((e) => MovieSummaryModel.fromJson(e))
+          .toList(),
     );
   }
 
