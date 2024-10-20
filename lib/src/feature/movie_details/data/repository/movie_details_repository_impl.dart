@@ -21,4 +21,20 @@ class MovieDetailsRepositoryImpl implements MovieDetailsRepository {
       return null;
     }
   }
+
+  @override
+  Future<List<String>> getTrailerKeys(int movieId) async {
+    final response = await apiRequestRepository.getRequest(
+      ConstApiPaths.movieVideos(movieId),
+    );
+    if (response == null) return [];
+    try {
+      return (response['results'] as List<Map<String, dynamic>>)
+          .map((e) => (e['key'] ?? '') as String)
+          .toList();
+    } catch (exception) {
+      // catchRunTimeException(parseException);
+      return [];
+    }
+  }
 }

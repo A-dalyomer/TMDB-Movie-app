@@ -5,4 +5,7 @@ import '../../data/model/movie_details_model.dart';
 abstract class MovieDetailsRepository {
   /// Get movie details
   Future<MovieDetailsModel?> getMovieDetails(int movieId);
+
+  /// Load movie trailer video keys
+  Future<List<String>> getTrailerKeys(int movieId);
 }

@@ -21,13 +21,18 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   ) async {
     final MovieDetails? movieDetails =
         await movieDetailsRepository.getMovieDetails(event.movieId);
+    final movieVideoKeys =
+        await movieDetailsRepository.getTrailerKeys(event.movieId);
     if (movieDetails == null) {
       emit(
         MovieDetailsError(),
       );
     } else {
       emit(
-        MovieDetailsDone(movieDetails: movieDetails),
+        MovieDetailsDone(
+          movieDetails: movieDetails,
+          movieVideoKeys: movieVideoKeys,
+        ),
       );
     }
   }
