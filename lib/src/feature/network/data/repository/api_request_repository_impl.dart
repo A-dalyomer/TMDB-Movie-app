@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:tmdp_movie_app/.secrets/api_keys.dart';
 
 import '../../domain/repository/api_request_repository.dart';
 import '../../domain/util/api_general_handler.dart';
@@ -19,6 +20,11 @@ class ApiRequestRepositoryImpl implements ApiRequestRepository {
   /// The API request errors handler
   final APIRequestHandlers apiRequestHandlers;
 
+  final Map<String, dynamic> defaultHeaders = {
+    "Accept": "Application/json",
+    "Authorization": "Bearer ${ApiKeys.tmdbApiKey}"
+  };
+
   @override
   Future<Map<String, dynamic>?> getRequest(
     String apiPath, {
@@ -28,7 +34,7 @@ class ApiRequestRepositoryImpl implements ApiRequestRepository {
     return await _makeRequest(
       request: () async => await apiClient.get(
         Uri.parse(ConstApiPaths.domainLink + apiPath),
-        headers: headers,
+        headers: {...defaultHeaders, ...?headers},
       ),
       requestCodesHandler: requestCodesHandler,
     );
@@ -44,7 +50,7 @@ class ApiRequestRepositoryImpl implements ApiRequestRepository {
     return await _makeRequest(
       request: () async => await apiClient.post(
         Uri.parse(ConstApiPaths.domainLink + apiPath),
-        headers: headers,
+        headers: {...defaultHeaders, ...?headers},
         body: jsonEncode(body),
       ),
       requestCodesHandler: requestCodesHandler,
