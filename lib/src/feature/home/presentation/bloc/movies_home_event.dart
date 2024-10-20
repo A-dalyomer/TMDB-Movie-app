@@ -6,8 +6,9 @@ sealed class MoviesHomeEvent {}
 final class RefreshMoviesEvent extends MoviesHomeEvent {}
 
 final class OpenMovieDetailsEvent extends MoviesHomeEvent {
-  OpenMovieDetailsEvent(this.movieId);
-  final int movieId;
+  OpenMovieDetailsEvent(this.context, this.movie);
+  final BuildContext context;
+  final MovieSummary movie;
 }
 
 final class OpenMoviesListEvent extends MoviesHomeEvent {

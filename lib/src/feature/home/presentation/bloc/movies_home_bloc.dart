@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:tmdp_movie_app/src/core/constants/const_config.dart';
 import 'package:tmdp_movie_app/src/feature/home/data/model/movie_summary_model.dart';
 import 'package:tmdp_movie_app/src/feature/home/data/model/movies_list_model.dart';
 import 'package:tmdp_movie_app/src/feature/home/domain/repository/movies_repository.dart';
 import 'package:tmdp_movie_app/src/feature/home/domain/util/enum.dart';
+import 'package:tmdp_movie_app/src/feature/home/presentation/screen/movie_details_screen.dart';
 
 import '../../domain/entity/movie_summary.dart';
 
@@ -14,7 +15,7 @@ part 'movies_home_state.dart';
 class MoviesHomeBloc extends HydratedBloc<MoviesHomeEvent, MoviesHomeState> {
   MoviesHomeBloc(this.moviesRepository) : super(MoviesHomeInitial()) {
     on<RefreshMoviesEvent>((event, emit) async => await getMovies(emit));
-    on<OpenMovieDetailsEvent>((even, emit) {});
+    on<OpenMovieDetailsEvent>((event, emit) => openMovieDetails(event));
     on<OpenMoviesListEvent>((even, emit) {});
   }
   final MoviesRepository moviesRepository;
@@ -48,6 +49,15 @@ class MoviesHomeBloc extends HydratedBloc<MoviesHomeEvent, MoviesHomeState> {
       if (result != null) return false;
     }
     return true;
+  }
+
+  void openMovieDetails(OpenMovieDetailsEvent event) {
+    Navigator.push(
+      event.context,
+      MaterialPageRoute(
+        builder: (context) => MovieDetailsScreen(movieSummary: event.movie),
+      ),
+    );
   }
 
   @override
