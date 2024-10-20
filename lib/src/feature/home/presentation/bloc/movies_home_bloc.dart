@@ -21,7 +21,7 @@ class MoviesHomeBloc extends HydratedBloc<MoviesHomeEvent, MoviesHomeState> {
 
   /// Load all home screen movie section data and emit proper response states
   Future<void> getMovies(Emitter emit) async {
-    if (state is MoviesHomeError) emit(MoviesHomeInitial);
+    if (state is MoviesHomeError) emit(MoviesHomeInitial());
     final results = await Future.wait<List<MovieSummary>?>(
       [
         moviesRepository.getNowPlayingMovies(),
