@@ -21,12 +21,18 @@ class MovieSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 2),
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+        ),
         if (movies == null)
           LoadingErrorWidget(refresh: refresh)
         else
           SizedBox(
-            height: 200,
+            height: MediaQuery.sizeOf(context).height * 0.28,
             child: ListView.builder(
               itemCount: movies!.length,
               scrollDirection: Axis.horizontal,
