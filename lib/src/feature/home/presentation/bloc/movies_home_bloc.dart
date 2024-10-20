@@ -4,7 +4,7 @@ import 'package:tmdp_movie_app/src/core/constants/const_config.dart';
 import 'package:tmdp_movie_app/src/feature/home/data/model/movie_summary_model.dart';
 import 'package:tmdp_movie_app/src/feature/home/domain/repository/movies_repository.dart';
 import 'package:tmdp_movie_app/src/feature/home/domain/util/enum.dart';
-import 'package:tmdp_movie_app/src/feature/home/presentation/screen/movie_details_screen.dart';
+import 'package:tmdp_movie_app/src/feature/movie_details/presentation/screen/movie_details_screen.dart';
 import 'package:tmdp_movie_app/src/feature/home/presentation/screen/movies_list_screen.dart';
 
 import '../../domain/entity/movie_summary.dart';
