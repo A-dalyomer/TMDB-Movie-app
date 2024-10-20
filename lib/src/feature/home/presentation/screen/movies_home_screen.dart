@@ -39,33 +39,36 @@ class MoviesHomeScreen extends StatelessWidget {
                   case MoviesHomeError _:
                     return const LoadingErrorWidget();
                   case MoviesHomeDone():
-                    return Column(
-                      children: [
-                        MovieSection(
-                          title: LocaleManager.tr(AppLocalizations.nowPlaying),
-                          refresh: () => openMoviesList(
-                            MovieType.nowPlaying,
-                            state.nowPlayingMovies,
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          MovieSection(
+                            title:
+                                LocaleManager.tr(AppLocalizations.nowPlaying),
+                            refresh: () => openMoviesList(
+                              MovieType.nowPlaying,
+                              state.nowPlayingMovies,
+                            ),
+                            movies: state.nowPlayingMovies,
                           ),
-                          movies: state.nowPlayingMovies,
-                        ),
-                        MovieSection(
-                          title: LocaleManager.tr(AppLocalizations.popular),
-                          refresh: () => openMoviesList(
-                            MovieType.popular,
-                            state.popularMovies,
+                          MovieSection(
+                            title: LocaleManager.tr(AppLocalizations.popular),
+                            refresh: () => openMoviesList(
+                              MovieType.popular,
+                              state.popularMovies,
+                            ),
+                            movies: state.popularMovies,
                           ),
-                          movies: state.popularMovies,
-                        ),
-                        MovieSection(
-                          title: LocaleManager.tr(AppLocalizations.topRated),
-                          refresh: () => openMoviesList(
-                            MovieType.topRated,
-                            state.topRatedMovies,
+                          MovieSection(
+                            title: LocaleManager.tr(AppLocalizations.topRated),
+                            refresh: () => openMoviesList(
+                              MovieType.topRated,
+                              state.topRatedMovies,
+                            ),
+                            movies: state.topRatedMovies,
                           ),
-                          movies: state.topRatedMovies,
-                        ),
-                      ],
+                        ],
+                      ),
                     );
                 }
               },
