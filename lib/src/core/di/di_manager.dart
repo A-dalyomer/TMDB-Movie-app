@@ -2,6 +2,8 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:tmdp_movie_app/src/feature/home/data/repository/movies_repository_impl.dart';
 import 'package:tmdp_movie_app/src/feature/home/domain/repository/movies_repository.dart';
+import 'package:tmdp_movie_app/src/feature/movie_details/data/repository/movie_details_repository_impl.dart';
+import 'package:tmdp_movie_app/src/feature/movie_details/domain/repository/movie_details_repository.dart';
 import 'package:tmdp_movie_app/src/feature/network/data/repository/api_request_repository_impl.dart';
 import 'package:tmdp_movie_app/src/feature/network/domain/repository/api_request_repository.dart';
 import 'package:tmdp_movie_app/src/feature/network/domain/util/api_general_handler.dart';
@@ -29,6 +31,12 @@ class DIManager {
     getIt.registerSingleton<MoviesRepository>(
       MoviesRepositoryImpl(
         getIt<ApiRequestRepository>(),
+      ),
+    );
+
+    getIt.registerSingleton<MovieDetailsRepository>(
+      MovieDetailsRepositoryImpl(
+        apiRequestRepository: getIt<ApiRequestRepository>(),
       ),
     );
   }
