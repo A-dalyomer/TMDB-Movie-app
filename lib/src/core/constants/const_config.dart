@@ -6,7 +6,7 @@ class ConstConfig {
     return "https://image.tmdb.org/t/p/w500$imagePath";
   }
 
-  static String posterVideoBase(int videoKey) {
+  static String posterVideoBase(String videoKey) {
     return "https://www.youtube.com/watch?v=$videoKey";
   }
 }

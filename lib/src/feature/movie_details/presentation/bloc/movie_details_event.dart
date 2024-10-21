@@ -8,3 +8,8 @@ final class LoadMovieDetailsEvent extends MovieDetailsEvent {
 
   final int movieId;
 }
+
+final class OpenMovieTrailerEvent extends MovieDetailsEvent {
+  OpenMovieTrailerEvent({required this.movieKey});
+  final String movieKey;
+}
