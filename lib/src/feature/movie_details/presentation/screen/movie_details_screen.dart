@@ -42,22 +42,37 @@ class MovieDetailsScreen extends StatelessWidget {
                   return SingleChildScrollView(
                     child: Column(
                       children: [
-                        PosterImageWidget(path: state.movieDetails.posterImage),
-                        Text(state.movieDetails.title),
-                        Text(state.movieDetails.dateTime.toString()),
+                        PosterImageWidget(
+                          path: state.movieDetails.posterImage,
+                          height: MediaQuery.sizeOf(context).height * 0.3,
+                          width: 2000,
+                          fit: BoxFit.fitWidth,
+                        ),
+                        Text(
+                          state.movieDetails.title,
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                        Text(
+                          state.movieDetails.dateTime
+                              .toString()
+                              .split(' ')
+                              .first,
+                        ),
                         MovieGenresWidget(genres: state.movieDetails.genres),
-                        Text(state.movieDetails.description),
+                        Text(
+                          state.movieDetails.description,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
                         Text(
                           state.movieDetails.productionCompanies
-                              .map(
-                                (e) => e.name,
-                              )
+                              .map((e) => e.name)
                               .toList()
                               .fold(
-                                '',
+                                'Productions',
                                 (previousValue, element) =>
                                     '$previousValue, $element',
                               ),
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
                         SizedBox(
                           height: 200,
