@@ -7,6 +7,7 @@ import 'package:tmdp_movie_app/src/core/di/di_manager.dart';
 import 'package:tmdp_movie_app/src/feature/home/domain/repository/movies_repository.dart';
 import 'package:tmdp_movie_app/src/feature/home/presentation/screen/movies_home_screen.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:tmdp_movie_app/src/feature/theme/domain/util/app_themes.dart';
 import 'package:tmdp_movie_app/src/feature/theme/presentation/bloc/theme_bloc.dart';
 
 void main() async {
@@ -41,11 +42,8 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               title: ConstConfig.appName,
               themeMode: themeMode(),
-              theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-                useMaterial3: true,
-                cardColor: Colors.purple,
-              ),
+              theme: AppThemes.lightTheme(),
+              darkTheme: AppThemes.darkTheme(),
               home: MoviesHomeScreen(
                 moviesRepository: DIManager.getIt<MoviesRepository>(),
               ),
