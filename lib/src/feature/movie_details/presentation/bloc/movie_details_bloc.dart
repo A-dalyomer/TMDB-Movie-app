@@ -8,9 +8,8 @@ part 'movie_details_state.dart';
 
 class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   MovieDetailsBloc(this.movieDetailsRepository) : super(MovieDetailsInitial()) {
-    on<MovieDetailsEvent>((event, emit) {
-      on<LoadMovieDetailsEvent>(loadMovieDetails);
-    });
+    on<LoadMovieDetailsEvent>(loadMovieDetails);
+    on<OpenMovieTrailerEvent>(openMovieTrailer);
   }
 
   final MovieDetailsRepository movieDetailsRepository;
