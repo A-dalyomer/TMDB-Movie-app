@@ -27,8 +27,13 @@ class MoviesHomeScreen extends StatelessWidget {
         create: (context) =>
             MoviesHomeBloc(moviesRepository)..add(RefreshMoviesEvent()),
         child: Builder(builder: (context) {
-          refreshMovies() async =>
-              context.read<MoviesHomeBloc>().add(RefreshMoviesEvent());
+          refreshMovies() async {
+            final moviesBloc = context.read<MoviesHomeBloc>();
+            Future future = moviesBloc.stream.first;
+            moviesBloc.add(RefreshMoviesEvent());
+            await future;
+          }
+
           openMoviesList(MovieType type, List<MovieSummary>? movies) => context
               .read<MoviesHomeBloc>()
               .add(OpenMoviesListEvent(context, type, movies!));
