@@ -10,6 +10,7 @@ import 'package:tmdp_movie_app/src/feature/home/presentation/bloc/movies_home_bl
 import 'package:tmdp_movie_app/src/feature/home/presentation/widget/movie_section.dart';
 import 'package:tmdp_movie_app/src/feature/localization/domain/util/app_localizations.dart';
 import 'package:tmdp_movie_app/src/feature/localization/domain/util/locale_manager.dart';
+import 'package:tmdp_movie_app/src/feature/theme/presentation/widget/toggle_theme_button.dart';
 
 class MoviesHomeScreen extends StatelessWidget {
   const MoviesHomeScreen({super.key, required this.moviesRepository});
@@ -18,7 +19,10 @@ class MoviesHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text(ConstConfig.appName)),
+      appBar: AppBar(
+        title: const Text(ConstConfig.appName),
+        actions: const [ToggleThemeButton()],
+      ),
       body: BlocProvider(
         create: (context) =>
             MoviesHomeBloc(moviesRepository)..add(RefreshMoviesEvent()),

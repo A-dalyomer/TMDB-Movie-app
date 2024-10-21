@@ -6,19 +6,20 @@ part 'theme_state.dart';
 
 class ThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
   ThemeBloc() : super(ThemeInitial(mode: ThemeMode.light)) {
-    on<ChangeThemeEvent>((event, emit) => toggleDarkMode());
+    on<ChangeThemeEvent>((event, emit) => toggleDarkMode(emit));
   }
 
   /// theme mode controller
   ThemeMode appThemeMode = ThemeMode.light;
 
   /// switch current app theme
-  void toggleDarkMode() {
+  void toggleDarkMode(Emitter emit) {
     if (appThemeMode == ThemeMode.light) {
       appThemeMode = ThemeMode.dark;
     } else {
       appThemeMode = ThemeMode.light;
     }
+    emit(ThemeInitial(mode: appThemeMode));
   }
 
   @override
