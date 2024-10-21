@@ -6,6 +6,7 @@ import 'package:tmdp_movie_app/src/core/widget/poster_image_widget.dart';
 import 'package:tmdp_movie_app/src/feature/home/domain/entity/movie_summary.dart';
 import 'package:tmdp_movie_app/src/feature/movie_details/domain/repository/movie_details_repository.dart';
 import 'package:tmdp_movie_app/src/feature/movie_details/presentation/bloc/movie_details_bloc.dart';
+import 'package:tmdp_movie_app/src/feature/movie_details/presentation/widget/movie_genres_widget.dart';
 import 'package:tmdp_movie_app/src/feature/movie_details/presentation/widget/movie_trailers_carousel.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
@@ -44,20 +45,7 @@ class MovieDetailsScreen extends StatelessWidget {
                         PosterImageWidget(path: state.movieDetails.posterImage),
                         Text(state.movieDetails.title),
                         Text(state.movieDetails.dateTime.toString()),
-                        Wrap(
-                          children: [
-                            for (var genre in state.movieDetails.genres)
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).cardColor,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(genre.name),
-                                ),
-                              )
-                          ],
-                        ),
+                        MovieGenresWidget(genres: state.movieDetails.genres),
                         Text(state.movieDetails.description),
                         Text(
                           state.movieDetails.productionCompanies
