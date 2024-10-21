@@ -29,8 +29,8 @@ class MovieDetailsRepositoryImpl implements MovieDetailsRepository {
     );
     if (response == null) return [];
     try {
-      return (response['results'] as List<Map<String, dynamic>>)
-          .map((e) => (e['key'] ?? '') as String)
+      return List.from(response['results'])
+          .map((e) => (e['key'] as String? ?? ''))
           .toList();
     } catch (exception) {
       // catchRunTimeException(parseException);
