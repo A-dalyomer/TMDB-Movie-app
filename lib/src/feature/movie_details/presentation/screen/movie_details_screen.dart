@@ -6,6 +6,7 @@ import 'package:tmdp_movie_app/src/core/widget/poster_image_widget.dart';
 import 'package:tmdp_movie_app/src/feature/home/domain/entity/movie_summary.dart';
 import 'package:tmdp_movie_app/src/feature/movie_details/domain/repository/movie_details_repository.dart';
 import 'package:tmdp_movie_app/src/feature/movie_details/presentation/bloc/movie_details_bloc.dart';
+import 'package:tmdp_movie_app/src/feature/movie_details/presentation/widget/movie_trailers_carousel.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   const MovieDetailsScreen({
@@ -72,28 +73,8 @@ class MovieDetailsScreen extends StatelessWidget {
                         ),
                         SizedBox(
                           height: 200,
-                          child: CarouselView(
-                            itemExtent: MediaQuery.sizeOf(context).width * 0.7,
-                            onTap: (index) =>
-                                context.read<MovieDetailsBloc>().add(
-                                      OpenMovieTrailerEvent(
-                                        movieKey: state.movieVideoKeys[index],
-                                      ),
-                                    ),
-                            children: [
-                              for (var _ in state.movieVideoKeys)
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).cardColor,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: const Icon(
-                                    Icons.play_arrow,
-                                    color: Colors.white,
-                                    size: 50,
-                                  ),
-                                )
-                            ],
+                          child: MovieTrailersCarousel(
+                            movieVideoKeys: state.movieVideoKeys,
                           ),
                         )
                       ],
