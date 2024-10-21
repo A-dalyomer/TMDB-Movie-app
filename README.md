@@ -1,16 +1,27 @@
 # tmdp_movie_app
 
-A new Flutter project.
+A Flutter App to discover the movies database on the The Movies Database.
 
-## Getting Started
+## Setup
+- You only need to create the api secret file containing the api key as following:
+  1. Create a file named "api_keys.dart" in the path '/lib/.secrets'.
+  2. Add the Variable "tmdbApiKey" with your API key to TMDB site.
+  3. Run/Build the app.
 
-This project is a starting point for a Flutter application.
+## App Structure and Features
+- Bloc for state management.
+- View movie sections on home screen of 3 movie categories.
+- Refresh indicator with different Api response errors and states handling.
+- Network feature for managing every single request from one place.
+- preparations for future localizations support.
+- App dark theme mode support.
+- View all category movies.
+- Offline caching for loaded movies data, images and latest opened movie using hydrated bloc and Cached network image.
+- Movie trailers links to youtube from the app.
+- Performance optimized with bloc widgets and data handling.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## TODO
+- Unit tests.
+- Favourite movies.
+- Movies search.
