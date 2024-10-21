@@ -7,6 +7,8 @@ import 'package:tmdp_movie_app/src/feature/home/domain/util/enum.dart';
 import 'package:tmdp_movie_app/src/feature/movie_details/presentation/screen/movie_details_screen.dart';
 import 'package:tmdp_movie_app/src/feature/home/presentation/screen/movies_list_screen.dart';
 
+import '../../../../core/di/di_manager.dart';
+import '../../../movie_details/domain/repository/movie_details_repository.dart';
 import '../../domain/entity/movie_summary.dart';
 
 part 'movies_home_event.dart';
@@ -55,7 +57,10 @@ class MoviesHomeBloc extends HydratedBloc<MoviesHomeEvent, MoviesHomeState> {
     Navigator.push(
       event.context,
       MaterialPageRoute(
-        builder: (context) => MovieDetailsScreen(movieSummary: event.movie),
+        builder: (context) => MovieDetailsScreen(
+          movieSummary: event.movie,
+          movieDetailsRepository: DIManager.getIt<MovieDetailsRepository>(),
+        ),
       ),
     );
   }
